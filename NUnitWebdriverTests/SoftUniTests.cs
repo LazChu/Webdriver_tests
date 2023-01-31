@@ -14,28 +14,29 @@ namespace NUnitWebdriverTests
             this.driver = new ChromeDriver();
             driver.Url = "https://softuni.bg";
             driver.Manage().Window.Maximize();
+            
         }
         [OneTimeTearDown]
-        public void ShutDown() 
-        { 
+        public void ShutDown()
+        {
             driver.Quit();
         }
         [Test]
         public void Test_assert_main_page_title()
         {
             //var driver = new ChromeDriver();
-           // driver.Url = "https://softuni.bg";
+            // driver.Url = "https://softuni.bg";
             string expectedTitle = "Обучение по програмиране - Софтуерен университет";
 
             Assert.That(driver.Title, Is.EqualTo(expectedTitle));
 
             //driver.Quit();
-         }
+        }
         [Test]
         public void Test_Contacts_button()
         {
             //var driver = new ChromeDriver();
-              
+
             //driver.Url = "https://softuni.bg";
             var element = driver.FindElement(By.CssSelector("#nav-items-list > ul > li:nth-child(7) > a > span"));
             element.Click();
@@ -43,9 +44,9 @@ namespace NUnitWebdriverTests
             string expectedTitle = "Контакти - Софтуерен университет";
 
             Assert.That(driver.Title, Is.EqualTo(expectedTitle));
-            
-            //driver.Quit()l;
-        
+
+            //driver.Quit();
+
         }
         [Test]
         public void Test_Programs_button()
@@ -58,6 +59,25 @@ namespace NUnitWebdriverTests
             var expectedElement = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/header/div/div[1]/h1"));
             expectedElement.Click();
             Assert.That(expectedElement.Displayed);
+
+        }
+        [Test]
+        public void Test_search_box()
+        {
+            var element = driver.FindElement(By.CssSelector("#search-icon-container > a > img"));
+            element.Click();    
+            var searchBox = driver.FindElement(By.Id("search-input"));
+            searchBox.Click();
+            searchBox.SendKeys("Qa");
+            searchBox.SendKeys(Keys.Enter);
+
+         
+            var searchedField = driver.FindElement(By.ClassName("section-title")).Text;
+
+            var expectedValue = driver.FindElement(By.CssSelector("body > div.content > div > div > h2"));
+
+            Assert.That(expectedValue, Is.EqualTo(expectedValue));
+
 
         }
     }
