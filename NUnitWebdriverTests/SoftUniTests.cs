@@ -14,6 +14,7 @@ namespace NUnitWebdriverTests
             this.driver = new ChromeDriver();
             driver.Url = "https://softuni.bg";
             driver.Manage().Window.Maximize();
+            
         }
         [OneTimeTearDown]
         public void ShutDown()
